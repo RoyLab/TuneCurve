@@ -120,7 +120,7 @@
     <ClInclude Include="mat2.h" />
     <ClInclude Include="mat3.h" />
     <ClInclude Include="mat4.h" />
-    <ClInclude Include="MultiCircle.h" />
+    <ClInclude Include="Ellipse.h" />
     <ClInclude Include="quaternion.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Shader.h" />
@@ -145,7 +145,7 @@
     <ClCompile Include="drawerView.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="MainFrm.cpp" />
-    <ClCompile Include="MultiCircle.cpp" />
+    <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Shader2D.cpp" />
     <ClCompile Include="stdafx.cpp">

@@ -1,8 +1,8 @@
 #include "stdafx.h"
-#include "MultiCircle.h"
+#include "Ellipse.h"
 #include <random>
 
-MultiCircle::MultiCircle(ID3D11Device *dev,
+MyEllipse::MyEllipse(ID3D11Device *dev,
 						 ID3D11DeviceContext *devCon):
 mDev(dev), mDevCon(devCon), mVertexBuff(nullptr),
 	mIndexBuff(nullptr), mPixelBuff(nullptr),
@@ -13,7 +13,7 @@ mDev(dev), mDevCon(devCon), mVertexBuff(nullptr),
 }
 
 
-MultiCircle::~MultiCircle()
+MyEllipse::~MyEllipse()
 {
 	if (mVertexBuff)
 	{
@@ -37,14 +37,14 @@ MultiCircle::~MultiCircle()
 	}
 }
 
-bool MultiCircle::Initialize(int width, int height)
+bool MyEllipse::Initialize(int width, int height)
 {
 	mScreenWidth = width;
 	mScreenHeight = height;
 	return InitializeBuffers();
 }
 
-bool MultiCircle::Frame()
+bool MyEllipse::Frame()
 {
 	//pixel buffer upate
 	if (mIsPixelBufferChanged)
@@ -67,7 +67,7 @@ bool MultiCircle::Frame()
 
 	return true;
 }
-void MultiCircle::Shutdown()
+void MyEllipse::Shutdown()
 {
 	if (mVertexBuff)
 	{
@@ -91,7 +91,7 @@ void MultiCircle::Shutdown()
 	}
 }
 
-bool MultiCircle::InitializeBuffers()
+bool MyEllipse::InitializeBuffers()
 {
 	const int count = 4*mCirclePara.count;
 
@@ -128,22 +128,22 @@ bool MultiCircle::InitializeBuffers()
 		float color2 = rand()/float(RAND_MAX);
 		// First triangle.
 		vertices[offset+0].position = D3DXVECTOR3(rect[0], rect[1], 0.0f);
-		vertices[offset+0].texture = D3DXVECTOR2(-texCoord, texCoord);
+		vertices[offset+0].texture = D3DXVECTOR2(rect[0], rect[1]);
 		vertices[offset+0].correction = D3DXVECTOR2(-correctionFactor, correctionFactor);
 		vertices[offset+0].color = D3DXVECTOR3(color, color1, color2);
 
 		vertices[offset+1].position = D3DXVECTOR3(rect[2], rect[3], 0.0f);
-		vertices[offset+1].texture = D3DXVECTOR2(texCoord, -texCoord);
+		vertices[offset+1].texture = D3DXVECTOR2(rect[2], rect[3]);
 		vertices[offset+1].correction = D3DXVECTOR2(correctionFactor, -correctionFactor);
 		vertices[offset+1].color = D3DXVECTOR3(color, color1, color2);
 
 		vertices[offset+2].position = D3DXVECTOR3(rect[0], rect[3], 0.0f);
-		vertices[offset+2].texture = D3DXVECTOR2(-texCoord, -texCoord);
+		vertices[offset+2].texture = D3DXVECTOR2(rect[0], rect[3]);
 		vertices[offset+2].correction = D3DXVECTOR2(-correctionFactor, -correctionFactor);
 		vertices[offset+2].color = D3DXVECTOR3(color, color1, color2);
 
 		vertices[offset+3].position = D3DXVECTOR3(rect[2], rect[1], 0.0f);
-		vertices[offset+3].texture = D3DXVECTOR2(texCoord, texCoord);
+		vertices[offset+3].texture = D3DXVECTOR2(rect[2], rect[1]);
 		vertices[offset+3].correction = D3DXVECTOR2(correctionFactor, correctionFactor);
 		vertices[offset+3].color = D3DXVECTOR3(color, color1, color2);
 

@@ -4,7 +4,7 @@ class VirtualDeviceDx11;
 class Camera;
 class Shader2D;
 class Circle;
-class MultiCircle;
+class MyEllipse;
 
 enum AA_MODE {AA_NONE = 0, AA_MS, AA_GAUSS, AA_STOCHASTIC_GAUSS};
 
@@ -35,6 +35,6 @@ private:
 	Camera *mCamera;
 	Shader2D *mShader;
 	//Circle *mCircle;
-	MultiCircle *mCircle;
+	MyEllipse *mCircle;
 };
 

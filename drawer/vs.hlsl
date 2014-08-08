@@ -30,9 +30,8 @@ struct VertexInputType
 struct PixelInputType
 {
     float4 position : SV_POSITION;
-    float2 tex : TEXCOORD0;
+	float2 tex : TEXCOORD0;
 	float3 color : COLOR;
-	float tolerance : TOLERANCE;
 };
 
 
@@ -56,7 +55,6 @@ PixelInputType VMain(VertexInputType input)
     
 	// Store the texture coordinates for the pixel shader.
 	output.tex = input.tex;
-	output.tolerance = input.tolerance/scale;
 	output.color = input.color;
     
     return output;

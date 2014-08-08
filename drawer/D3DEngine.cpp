@@ -3,7 +3,7 @@
 #include "VirtualDeviceDx11.h"
 #include "Camera.h"
 #include "Shader2D.h"
-#include "MultiCircle.h"
+#include "Ellipse.h"
 
 
 D3DEngine::D3DEngine(void):
@@ -42,23 +42,24 @@ bool D3DEngine::Initialize(int width, int height, HWND hWnd)
 	}
 
 	//mCircle = new Circle;
-	mCircle = new MultiCircle(mD3D->GetDevice(), mD3D->GetDeviceContext());
+	mCircle = new MyEllipse(mD3D->GetDevice(), mD3D->GetDeviceContext());
 	if (!mCircle) return false;
 
 	//res = mCircle->Initialize(mD3D->GetDevice(), width, height);
-	MultiCircle::CirclePara cPara;
+	MyEllipse::CirclePara cPara;
 	cPara.center = float2(0, 0);
 	cPara.maxSize = 200.0f;
-	cPara.count = 50;
+	cPara.count = 1;
 	mCircle->SetCircleParameter(cPara);
 
-	MultiCircle::PixelBufferType pBufferData;
+	MyEllipse::PixelBufferType pBufferData;
+	pBufferData.coef[0] = 80.0f;
+	pBufferData.coef[1] = 5.0f;
+	pBufferData.coef[2] = 0.0f;
+	pBufferData.coef[3] = 0.0f;
+	pBufferData.C = -25600.0f;
+	pBufferData.width = 3.0f;
 	pBufferData.AAMode = AA_GAUSS;
-	pBufferData.clipEdge = 3.0f;
-	pBufferData.samplelvl = 0;
-	pBufferData.thet = 1.0f;
-	pBufferData.sigma_2 = 0.0f;
-	pBufferData.noise = 20;
 	mCircle->SetPixelBufferData(pBufferData);
 
 	res = mCircle->Initialize(width, height);
@@ -141,25 +142,25 @@ AA_MODE D3DEngine::GetAAMode()const
 void D3DEngine::SetSigmaValue(int val)
 {
 	float tmp = (float)2.0e-2*val;
-	mCircle->GetPixelBufferData()->sigma_2 = -2.0*tmp*tmp;
+	//mCircle->GetPixelBufferData()->sigma_2 = -2.0*tmp*tmp;
 }
 
 void D3DEngine::SetThetValue(int val)
 {
-	mCircle->GetPixelBufferData()->thet = (float)val/100.0f+1.0f;
+	//mCircle->GetPixelBufferData()->thet = (float)val/100.0f+1.0f;
 }
 
 void D3DEngine::SetMSAAlvl(int val)
 {
-	mCircle->GetPixelBufferData()->samplelvl = val;
+	//mCircle->GetPixelBufferData()->samplelvl = val;
 }
 
 void D3DEngine::SetClipEdgeValue(int val)
 {
-	mCircle->GetPixelBufferData()->clipEdge = (float)val/20.0f+1.0f;
+	//mCircle->GetPixelBufferData()->clipEdge = (float)val/20.0f+1.0f;
 }
 
 void D3DEngine::SetNoiseValue(float val)
 {
-	mCircle->GetPixelBufferData()->noise = int(val*200);
+	//mCircle->GetPixelBufferData()->noise = int(val*200);
 }

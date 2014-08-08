@@ -6,7 +6,7 @@
 #include <D3D11.h>
 using namespace GS;
 
-class MultiCircle
+class MyEllipse
 {
 public:
 	struct VertexType
@@ -20,12 +20,10 @@ public:
 
 	struct PixelBufferType
 	{
-		float sigma_2;
-		float clipEdge;
-		float thet;
-		AA_MODE AAMode;
-		int samplelvl;
-		int noise;
+		 D3DXVECTOR4 coef;
+		 float C;
+		 float width;
+		 AA_MODE AAMode;
 	};
 
 	struct CirclePara
@@ -35,8 +33,8 @@ public:
 		float maxSize;
 	};
 public:
-	MultiCircle(ID3D11Device*, ID3D11DeviceContext*);
-	virtual ~MultiCircle();
+	MyEllipse(ID3D11Device*, ID3D11DeviceContext*);
+	virtual ~MyEllipse();
 
 	virtual bool Initialize(int, int);
 	virtual bool Frame();
