@@ -41,6 +41,8 @@ ON_WM_LBUTTONUP()
 //ON_WM_MOUSEHWHEEL()
 ON_WM_MOUSEWHEEL()
 ON_WM_MOUSEMOVE()
+ON_UPDATE_COMMAND_UI(ID_MODE_STOCHASTICGAUSS, &CdrawerView::OnUpdateModeStochasticgauss)
+ON_COMMAND(ID_MODE_STOCHASTICGAUSS, &CdrawerView::OnModeStochasticgauss)
 END_MESSAGE_MAP()
 
 // CdrawerView construction/destruction
@@ -144,6 +146,8 @@ void CdrawerView::OnDeltaValue()
 		mDiag->mMultiVal.SetWindowTextW(L"2");
 		mDiag->mClipSlider.SetPos(30);
 		mDiag->mClipValue.SetWindowTextW(L"2.50");
+		mDiag->mNoiseSlider.SetPos(20);
+		mDiag->mNoiseVal.SetWindowTextW(L"0.2");
 		switch (m3DEngine->GetAAMode())
 		{
 		case AA_GAUSS:
@@ -151,6 +155,9 @@ void CdrawerView::OnDeltaValue()
 			break;
 		case AA_MS:
 			OnEditMsaa();
+			break;
+		case AA_STOCHASTIC_GAUSS:
+			OnModeStochasticgauss();
 			break;
 		default:
 			break;
@@ -170,6 +177,7 @@ void CdrawerView::OnEditGauss()
 		mDiag->mThetSlider.EnableWindow(true);
 		mDiag->mClipSlider.EnableWindow(true);
 		mDiag->mMultiSlider.EnableWindow(false);
+		mDiag->mNoiseSlider.EnableWindow(false);
 	}
 
 }
@@ -190,6 +198,7 @@ void CdrawerView::OnEditMsaa()
 		mDiag->mThetSlider.EnableWindow(false);
 		mDiag->mClipSlider.EnableWindow(false);
 		mDiag->mMultiSlider.EnableWindow(true);
+		mDiag->mNoiseSlider.EnableWindow(false);
 	}
 }
 
@@ -197,6 +206,25 @@ void CdrawerView::OnEditMsaa()
 void CdrawerView::OnUpdateEditMsaa(CCmdUI *pCmdUI)
 {
 	pCmdUI->SetCheck(AA_MS == m3DEngine->GetAAMode());
+}
+
+void CdrawerView::OnUpdateModeStochasticgauss(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck(AA_STOCHASTIC_GAUSS == m3DEngine->GetAAMode());
+}
+
+
+void CdrawerView::OnModeStochasticgauss()
+{
+	m3DEngine->SetAAMode(AA_STOCHASTIC_GAUSS);
+	if (mDiag)
+	{
+		mDiag->mSlider.EnableWindow(true);
+		mDiag->mThetSlider.EnableWindow(true);
+		mDiag->mClipSlider.EnableWindow(true);
+		mDiag->mMultiSlider.EnableWindow(false);
+		mDiag->mNoiseSlider.EnableWindow(true);
+	}
 }
 
 void CdrawerView::OnDestroy()
@@ -238,7 +266,6 @@ BOOL CdrawerView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 
 void CdrawerView::OnMouseMove(UINT nFlags, CPoint point)
 {
-	// TODO: Add your message handler code here and/or call default
 	mHandler->OnMouseMove(nFlags, point);
 	CView::OnMouseMove(nFlags, point);
 }

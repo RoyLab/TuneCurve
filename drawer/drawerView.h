@@ -60,6 +60,8 @@ public:
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg void OnUpdateModeStochasticgauss(CCmdUI *pCmdUI);
+	afx_msg void OnModeStochasticgauss();
 };
 
 #ifndef _DEBUG  // debug version in drawerView.cpp

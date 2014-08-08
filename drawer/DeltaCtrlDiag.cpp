@@ -38,6 +38,8 @@ void DeltaCtrlDiag::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_MS_VALUE, mMultiVal);
 	DDX_Control(pDX, IDC_CLIP_SLIDER, mClipSlider);
 	DDX_Control(pDX, IDC_CLIP_VALUE, mClipValue);
+	DDX_Control(pDX, IDC_NOISE_SLIDER, mNoiseSlider);
+	DDX_Control(pDX, IDC_NOISE_VALUE, mNoiseVal);
 }
 
 
@@ -90,6 +92,15 @@ void DeltaCtrlDiag::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 		CString tmp;
 		tmp.Format(_T("%0.2f"), val2);
 		mClipValue.SetWindowTextW(tmp);
+		break;
+	}
+	case IDC_NOISE_SLIDER:
+	{
+		float val = mNoiseSlider.GetPos()/100.0f;
+		mParent->GetD3DEngine()->SetNoiseValue(val);
+		CString tmp;
+		tmp.Format(_T("%0.2f"), val);
+		mNoiseVal.SetWindowTextW(tmp);
 		break;
 	}
 	default:

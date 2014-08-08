@@ -25,6 +25,7 @@ public:
 		float thet;
 		AA_MODE AAMode;
 		int samplelvl;
+		int noise;
 	};
 
 	struct CirclePara

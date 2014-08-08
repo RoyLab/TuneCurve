@@ -13,6 +13,7 @@ cbuffer PixelBufferType
 	float thet;
 	int AAMode;
 	int samplelvl;
+	int noise;
 };
 
 //////////////
@@ -31,6 +32,12 @@ float normalFunc(float x)
 	return thet*exp((x*x)/sigma_2);
 }
 
+float normalFuncRandom(float x, float2 pos)
+{
+	return thet * exp((x*x)/sigma_2*((pos.x*pos.x+pos.y*pos.y)%noise+100-noise/2)/100);
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // Pixel Shader
 ////////////////////////////////////////////////////////////////////////////////
@@ -48,9 +55,9 @@ float4 PMain(PixelInputType input) : SV_TARGET
 	float alpha = 1.0f;
 
 	if (AAMode == 2/*GAUSS*/)
-	{
 		alpha = normalFunc(distance/input.tolerance);
-	}
+	else if (AAMode == 3)
+		alpha = normalFuncRandom(distance/input.tolerance, input.position.xy);
 	else if (AAMode == 1/*MSAA*/)
 	{
 		if (samplelvl != 0)

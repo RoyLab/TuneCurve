@@ -6,7 +6,7 @@ class Shader2D;
 class Circle;
 class MultiCircle;
 
-enum AA_MODE {AA_NONE = 0, AA_MS, AA_GAUSS};
+enum AA_MODE {AA_NONE = 0, AA_MS, AA_GAUSS, AA_STOCHASTIC_GAUSS};
 
 
 class D3DEngine
@@ -25,6 +25,7 @@ public:
 	void SetAAMode(AA_MODE mode);
 	void SetClipEdgeValue(int val);
 	void SetThetValue(int val);
+	void SetNoiseValue(float val);
 	AA_MODE GetAAMode()const;
 
 	Camera *GetCamera()const{return mCamera;}

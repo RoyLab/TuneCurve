@@ -49,7 +49,7 @@ bool D3DEngine::Initialize(int width, int height, HWND hWnd)
 	MultiCircle::CirclePara cPara;
 	cPara.center = float2(0, 0);
 	cPara.maxSize = 200.0f;
-	cPara.count = 100;
+	cPara.count = 50;
 	mCircle->SetCircleParameter(cPara);
 
 	MultiCircle::PixelBufferType pBufferData;
@@ -58,6 +58,7 @@ bool D3DEngine::Initialize(int width, int height, HWND hWnd)
 	pBufferData.samplelvl = 0;
 	pBufferData.thet = 1.0f;
 	pBufferData.sigma_2 = 0.0f;
+	pBufferData.noise = 20;
 	mCircle->SetPixelBufferData(pBufferData);
 
 	res = mCircle->Initialize(width, height);
@@ -156,4 +157,9 @@ void D3DEngine::SetMSAAlvl(int val)
 void D3DEngine::SetClipEdgeValue(int val)
 {
 	mCircle->GetPixelBufferData()->clipEdge = (float)val/20.0f+1.0f;
+}
+
+void D3DEngine::SetNoiseValue(float val)
+{
+	mCircle->GetPixelBufferData()->noise = int(val*200);
 }

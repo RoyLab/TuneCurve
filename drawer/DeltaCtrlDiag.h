@@ -34,4 +34,6 @@ public:
 	CSliderCtrl mClipSlider;
 	CStatic mClipValue;
 	afx_msg void OnNcDestroy();
+	CSliderCtrl mNoiseSlider;
+	CStatic mNoiseVal;
 };

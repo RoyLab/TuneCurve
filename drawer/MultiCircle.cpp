@@ -112,15 +112,15 @@ bool MultiCircle::InitializeBuffers()
 		unsigned int offset = i*4;
 
 		//left, top, right, down
-		float4 rect(mCirclePara.center[0]-size,
-					mCirclePara.center[1]+size,
-					mCirclePara.center[0]+size,
-					mCirclePara.center[1]-size);
+		//float4 rect(mCirclePara.center[0]-size,
+		//			mCirclePara.center[1]+size,
+		//			mCirclePara.center[0]+size,
+		//			mCirclePara.center[1]-size);
 
-		//float4 rect(mCirclePara.center[0]-size-correctionFactor,
-		//			mCirclePara.center[1]+size+correctionFactor,
-		//			mCirclePara.center[0]+size+correctionFactor,
-		//			mCirclePara.center[1]-size-correctionFactor);
+		float4 rect(mCirclePara.center[0]-size-correctionFactor,
+					mCirclePara.center[1]+size+correctionFactor,
+					mCirclePara.center[0]+size+correctionFactor,
+					mCirclePara.center[1]-size-correctionFactor);
 
 		float texCoord = 1.0f+correctionFactor/size;
 		float color = rand()/float(RAND_MAX);

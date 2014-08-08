@@ -16,22 +16,26 @@
 #define IDC_MS_SLIDER                   1006
 #define IDC_MS_TEXT                     1007
 #define IDC_MS_VALUE                    1008
-#define IDC_MS_SLIDER2                  1009
 #define IDC_CLIP_SLIDER                 1009
 #define IDC_CLIP_TEXT                   1010
 #define IDC_CLIP_VALUE                  1011
+#define IDC_MS_SLIDER2                  1012
+#define IDC_NOISE_SLIDER                1012
+#define IDC_NOISE_TEXT                  1013
+#define IDC_NOISE_VALUE                 1014
 #define ID_Menu                         32771
 #define ID_DELTA_VALUE                  32772
 #define ID_EDIT_GAUSS                   32773
 #define ID_EDIT_MSAA                    32774
 #define ID_EDIT_MSAALEVEL               32775
+#define ID_MODE_STOCHASTICGAUSS         32776
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        312
-#define _APS_NEXT_COMMAND_VALUE         32776
+#define _APS_NEXT_COMMAND_VALUE         32777
 #define _APS_NEXT_CONTROL_VALUE         1010
 #define _APS_NEXT_SYMED_VALUE           310
 #endif

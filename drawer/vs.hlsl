@@ -45,8 +45,7 @@ PixelInputType VMain(VertexInputType input)
 
 	// Change the position vector to be 4 units for proper matrix calculations.
     input.position.w = 1.0f;
-	input.position.x = input.position.x + input.correction.x;
-	//input.position.x = input.position.x - input.correction.x;
+
 	// Calculate the position of the vertex against the world, view, and projection matrices.
     output.position = mul(input.position, worldMatrix);
     output.position = mul(output.position, viewMatrix);
