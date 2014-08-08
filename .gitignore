@@ -1,0 +1,8 @@
+/Debug/
+/Release/
+/drawer/Debug/
+/drawer/Release/
+/ipch/
+*.sdf
+*.suo
+*.opensdf
