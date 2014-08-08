@@ -34,7 +34,8 @@ float normalFunc(float x)
 
 float normalFuncRandom(float x, float2 pos)
 {
-	return thet * exp((x*x)/sigma_2*((pos.x*pos.x+pos.y*pos.y)%noise+100-noise/2)/100);
+	float tmp = sqrt(pos.x*pos.y);
+	return thet * exp((x*x)/sigma_2*((tmp*100%97+tmp*100000%131)%noise+100-noise/2)/100);
 }
 
 
@@ -57,7 +58,12 @@ float4 PMain(PixelInputType input) : SV_TARGET
 	if (AAMode == 2/*GAUSS*/)
 		alpha = normalFunc(distance/input.tolerance);
 	else if (AAMode == 3)
-		alpha = normalFuncRandom(distance/input.tolerance, input.position.xy);
+	{
+		if (noise == 0)
+			alpha = normalFunc(distance/input.tolerance);
+		else
+			alpha = normalFuncRandom(distance/input.tolerance, input.position.xy);
+	}
 	else if (AAMode == 1/*MSAA*/)
 	{
 		if (samplelvl != 0)
