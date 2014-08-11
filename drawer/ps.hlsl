@@ -62,6 +62,8 @@ float4 PMain(PixelInputType input) : SV_TARGET
 
 	if (d > width) discard;
 	if (d < 0.5) return float4(1, 0, 0, 1);
+	if (abs(input.tex.x - input.tex.y) < 1.0)
+		return float4(0,1,0,1);
 	return float4(1, 1, 1, 1);
 }
 
