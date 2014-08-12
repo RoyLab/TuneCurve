@@ -14,6 +14,9 @@ public:
 	DeltaCtrlDiag(CWnd* pParent = NULL);   // standard constructor
 	virtual ~DeltaCtrlDiag();
 
+	void SetLineWidth(float);
+	void SetYAxis(float);
+
 // Dialog Data
 	enum { IDD = IDD_DELTA_CTRL };
 

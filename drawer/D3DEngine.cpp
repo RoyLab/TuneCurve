@@ -48,17 +48,17 @@ bool D3DEngine::Initialize(int width, int height, HWND hWnd)
 	//res = mCircle->Initialize(mD3D->GetDevice(), width, height);
 	MyEllipse::CirclePara cPara;
 	cPara.center = float2(0, 0);
-	cPara.maxSize = 250.0f;
+	cPara.maxSize = 500.0f;
 	cPara.count = 1;
 	mCircle->SetCircleParameter(cPara);
 
 	MyEllipse::PixelBufferType pBufferData;
 	pBufferData.coef[0] = 1.0f;
-	pBufferData.coef[1] = 500.0f;
+	pBufferData.coef[1] = 40.0f;
 	pBufferData.coef[2] = 0.0f;
 	pBufferData.coef[3] = 0.0f;
 	pBufferData.C = -40000.0f;
-	pBufferData.width = 10.0f;
+	pBufferData.width = 8.0f;
 	pBufferData.AAMode = AA_GAUSS;
 	mCircle->SetPixelBufferData(pBufferData);
 
@@ -164,3 +164,15 @@ void D3DEngine::SetNoiseValue(float val)
 {
 	//mCircle->GetPixelBufferData()->noise = int(val*200);
 }
+
+void D3DEngine::SetLineWidth(float val)
+{
+	mCircle->GetPixelBufferData()->width = val;
+}
+
+void D3DEngine::SetYAxis(float val)
+{
+	if (val < 1) mCircle->GetPixelBufferData()->coef[1] = 40000.0f;
+	else mCircle->GetPixelBufferData()->coef[1] = 40000.0f/val/val;
+}
+

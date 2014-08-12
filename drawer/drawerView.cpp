@@ -131,6 +131,11 @@ void CdrawerView::OnInitialUpdate()
 	m3DEngine->SetSigmaValue(50);
 	m3DEngine->SetMSAAlvl(2);
 	m3DEngine->SetClipEdgeValue(30);
+	
+	////////////////////////////////////////
+	m3DEngine->SetLineWidth(2.0f);
+	m3DEngine->SetYAxis(200.0f);
+	////////////////////////////////////////
 }
 
 void CdrawerView::OnDeltaValue()
@@ -148,6 +153,11 @@ void CdrawerView::OnDeltaValue()
 		mDiag->mClipValue.SetWindowTextW(L"2.50");
 		mDiag->mNoiseSlider.SetPos(20);
 		mDiag->mNoiseVal.SetWindowTextW(L"0.2");
+
+		////////////////////////////////////////
+		mDiag->SetLineWidth(2.0f);
+		mDiag->SetYAxis(200.0f);
+		////////////////////////////////////////
 		switch (m3DEngine->GetAAMode())
 		{
 		case AA_GAUSS:
@@ -173,11 +183,11 @@ void CdrawerView::OnEditGauss()
 	m3DEngine->SetAAMode(AA_GAUSS);
 	if (mDiag)
 	{
-		mDiag->mSlider.EnableWindow(true);
-		mDiag->mThetSlider.EnableWindow(true);
-		mDiag->mClipSlider.EnableWindow(true);
-		mDiag->mMultiSlider.EnableWindow(false);
-		mDiag->mNoiseSlider.EnableWindow(false);
+		//mDiag->mSlider.EnableWindow(true);
+		//mDiag->mThetSlider.EnableWindow(true);
+		//mDiag->mClipSlider.EnableWindow(true);
+		//mDiag->mMultiSlider.EnableWindow(false);
+		//mDiag->mNoiseSlider.EnableWindow(false);
 	}
 
 }
@@ -194,11 +204,11 @@ void CdrawerView::OnEditMsaa()
 	m3DEngine->SetAAMode(AA_MS);
 	if (mDiag)
 	{
-		mDiag->mSlider.EnableWindow(false);
-		mDiag->mThetSlider.EnableWindow(false);
-		mDiag->mClipSlider.EnableWindow(false);
-		mDiag->mMultiSlider.EnableWindow(true);
-		mDiag->mNoiseSlider.EnableWindow(false);
+		//mDiag->mSlider.EnableWindow(false);
+		//mDiag->mThetSlider.EnableWindow(false);
+		//mDiag->mClipSlider.EnableWindow(false);
+		//mDiag->mMultiSlider.EnableWindow(true);
+		//mDiag->mNoiseSlider.EnableWindow(false);
 	}
 }
 
@@ -219,11 +229,11 @@ void CdrawerView::OnModeStochasticgauss()
 	m3DEngine->SetAAMode(AA_STOCHASTIC_GAUSS);
 	if (mDiag)
 	{
-		mDiag->mSlider.EnableWindow(true);
-		mDiag->mThetSlider.EnableWindow(true);
-		mDiag->mClipSlider.EnableWindow(true);
-		mDiag->mMultiSlider.EnableWindow(false);
-		mDiag->mNoiseSlider.EnableWindow(true);
+		//mDiag->mSlider.EnableWindow(true);
+		//mDiag->mThetSlider.EnableWindow(true);
+		//mDiag->mClipSlider.EnableWindow(true);
+		//mDiag->mMultiSlider.EnableWindow(false);
+		//mDiag->mNoiseSlider.EnableWindow(true);
 	}
 }
 
@@ -259,7 +269,7 @@ void CdrawerView::OnLButtonUp(UINT nFlags, CPoint point)
 
 BOOL CdrawerView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 {
-	mHandler->OnMouseWheel(nFlags, zDelta, pt);
+	//mHandler->OnMouseWheel(nFlags, zDelta, pt);
 	return CView::OnMouseWheel(nFlags, zDelta, pt);
 }
 

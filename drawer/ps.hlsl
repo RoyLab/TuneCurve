@@ -117,8 +117,20 @@ float4 PMain(PixelInputType input) : SV_TARGET
 		thet = (thetLow + thetHigh) / 2.0f;
 	}
 
-	float d = length(input.tex-float2(m*cos(thet), n*sin(thet)));
-	if (d > width) discard;
-	if (d < 0.5f) return float4(1, 0, 0, 1);
-	return float4(1, 1, 1, 1);
+	float p1 = length(f1(input.tex));
+	float p2 = length(f2(input.tex));
+	float p0 = abs(f(input.tex));
+	float tmp = p1/p2/2.0f;
+
+	float d;
+	if (AAMode == 1) d = sqrt(tmp*tmp + p0/p2)-tmp;
+	else d = abs(f(input.tex.xy)/length(f1(input.tex)));
+	float4 res = float4(0, 0, 0, 0);
+	if (d < width) res += float4(1, 0, 0, 1);
+
+	d = length(input.tex-float2(m*cos(thet), n*sin(thet)));
+	if (d < width) res += float4(0, 1, 0, 1);
+	if (d < 0.5f) return float4(0, 0, 1, 1);
+	res.a = 1.0f;
+	return res;
 }

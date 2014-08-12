@@ -27,6 +27,8 @@ public:
 	void SetThetValue(int val);
 	void SetNoiseValue(float val);
 	AA_MODE GetAAMode()const;
+	void SetLineWidth(float val);
+	void SetYAxis(float val);
 
 	Camera *GetCamera()const{return mCamera;}
 	VirtualDeviceDx11 *GetDevice()const{return mD3D;}
