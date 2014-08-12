@@ -49,7 +49,7 @@ bool D3DEngine::Initialize(int width, int height, HWND hWnd)
 	MultiCircle::CirclePara cPara;
 	cPara.center = float2(0, 0);
 	cPara.maxSize = 200.0f;
-	cPara.count = 50;
+	cPara.count = 80;
 	mCircle->SetCircleParameter(cPara);
 
 	MultiCircle::PixelBufferType pBufferData;
@@ -59,6 +59,7 @@ bool D3DEngine::Initialize(int width, int height, HWND hWnd)
 	pBufferData.thet = 1.0f;
 	pBufferData.sigma_2 = 0.0f;
 	pBufferData.noise = 20;
+	pBufferData.color = D3DXVECTOR4(1.0f, 1.0f, 1.0f, -1.0f);
 	mCircle->SetPixelBufferData(pBufferData);
 
 	res = mCircle->Initialize(width, height);
@@ -119,8 +120,8 @@ bool D3DEngine::Frame()
 	res = mCircle->Frame();
 	if (!res) return false;
 
-	res = mShader->Render(mD3D->GetDeviceContext(), mCircle->GetIndexCount(), 
-		worldMatrix, viewMatrix, orthoMatrix, mCamera->GetScale());
+	res = mShader->Render(mD3D->GetDeviceContext(), mSingleCircle?6:mCircle->GetIndexCount(), 
+		worldMatrix, viewMatrix, orthoMatrix, mCamera->GetScale(), mKeepWidth);
 	if (!res) return false;
 
 	mD3D->EndScene();

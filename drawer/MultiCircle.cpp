@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MultiCircle.h"
+#include "D3DEngine.h"
 #include <random>
 
 MultiCircle::MultiCircle(ID3D11Device *dev,
@@ -98,14 +99,9 @@ bool MultiCircle::InitializeBuffers()
 	// Initialize vertex buffer.
 	VertexType *vertices = new VertexType[count];
 
-	float size = 1.0f;
+	float size = mCirclePara.maxSize;;
 	const float step = mCirclePara.maxSize/(mCirclePara.count-1);
 	const float correctionFactor = 5.0f;
-
-	if (mCirclePara.count == 1)
-	{
-		size = mCirclePara.maxSize;
-	}
 
 	for (int i = 0; i < mCirclePara.count; i++)
 	{
@@ -152,7 +148,7 @@ bool MultiCircle::InitializeBuffers()
 		vertices[offset+2].tolerance = 
 		vertices[offset+3].tolerance = 1.0f/(rect[1]-rect[3]-correctionFactor*2);
 
-		size += step;
+		size -= step;
 	}
 
 	mVertexBuff = new D3D11Buffer(::Default, ::Vertex);

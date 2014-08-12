@@ -8,6 +8,7 @@
 /////////////
 cbuffer PixelBufferType
 {
+	float4 color;
 	float sigma_2;
 	float clipEdge;
 	float thet;
@@ -95,5 +96,6 @@ float4 PMain(PixelInputType input) : SV_TARGET
 			}
 		}
 	}
-	return float4(input.color, alpha);
+	if (color.a < 0) return float4(input.color, alpha);
+	else return float4(color.xyz, alpha);
 }

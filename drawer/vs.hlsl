@@ -12,6 +12,7 @@ cbuffer MatrixBuffer
 	matrix viewMatrix;
 	matrix projectionMatrix;
 	float scale;
+	int keepWidth;
 };
 
 
@@ -56,7 +57,8 @@ PixelInputType VMain(VertexInputType input)
     
 	// Store the texture coordinates for the pixel shader.
 	output.tex = input.tex;
-	output.tolerance = input.tolerance/scale;
+	output.tolerance = input.tolerance;
+	if (keepWidth == 0) output.tolerance /= scale;
 	output.color = input.color;
     
     return output;

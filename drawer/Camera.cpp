@@ -16,7 +16,6 @@ Camera::Camera()
 	m_rotationZ = 0.0f;
 
 	mScale = 1.0f;
-	//test
 }
 
 
@@ -79,6 +78,10 @@ float Camera::GetScale() const
 	return mScale;
 }
 
+void Camera::SetScale(float k)
+{
+	mScale = k;
+}
 
 void Camera::Render()
 {

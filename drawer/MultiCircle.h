@@ -1,10 +1,11 @@
 #pragma once
 #include "D3D11Buffer.h"
 #include "typedefs.h"
-#include "D3DEngine.h"
 #include <D3DX10math.h>
 #include <D3D11.h>
 using namespace GS;
+enum AA_MODE;
+class D3DEngine;
 
 class MultiCircle
 {
@@ -20,6 +21,7 @@ public:
 
 	struct PixelBufferType
 	{
+		D3DXVECTOR4 color;
 		float sigma_2;
 		float clipEdge;
 		float thet;
