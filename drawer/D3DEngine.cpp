@@ -54,11 +54,11 @@ bool D3DEngine::Initialize(int width, int height, HWND hWnd)
 
 	MyEllipse::PixelBufferType pBufferData;
 	pBufferData.coef[0] = 1.0f;
-	pBufferData.coef[1] = 1.0f;
+	pBufferData.coef[1] = 500.0f;
 	pBufferData.coef[2] = 0.0f;
 	pBufferData.coef[3] = 0.0f;
 	pBufferData.C = -40000.0f;
-	pBufferData.width = 2.0f;
+	pBufferData.width = 10.0f;
 	pBufferData.AAMode = AA_GAUSS;
 	mCircle->SetPixelBufferData(pBufferData);
 
