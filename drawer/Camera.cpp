@@ -16,6 +16,7 @@ Camera::Camera()
 	m_rotationZ = 0.0f;
 
 	mScale = 1.0f;
+	//test
 }
 
 
