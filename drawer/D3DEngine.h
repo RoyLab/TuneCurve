@@ -1,10 +1,9 @@
 #pragma once
+#include "MultiCircle.h"
 
 class VirtualDeviceDx11;
 class Camera;
 class Shader2D;
-class Circle;
-class MultiCircle;
 
 enum AA_MODE {AA_NONE = 0, AA_MS, AA_GAUSS, AA_STOCHASTIC_GAUSS};
 
@@ -30,11 +29,13 @@ public:
 
 	Camera *GetCamera()const{return mCamera;}
 	VirtualDeviceDx11 *GetDevice()const{return mD3D;}
+	MultiCircle::PixelBufferType &GetPixelBuffer(){return *(mCircle->GetPixelBufferData());}
+
+	bool mSingleCircle, mKeepWidth;
 private:
 	VirtualDeviceDx11 *mD3D;
 	Camera *mCamera;
 	Shader2D *mShader;
-	//Circle *mCircle;
 	MultiCircle *mCircle;
 };
 

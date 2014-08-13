@@ -78,6 +78,10 @@ float Camera::GetScale() const
 	return mScale;
 }
 
+void Camera::SetScale(float k)
+{
+	mScale = k;
+}
 
 void Camera::Render()
 {

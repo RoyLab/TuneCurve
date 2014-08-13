@@ -83,7 +83,7 @@ void Shader2D::GetInputLayerout(D3D11_INPUT_ELEMENT_DESC** desc, int& numElement
 }
 
 bool Shader2D::SetShaderParameters(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, 
-											 D3DXMATRIX projectionMatrix, float scale)
+											 D3DXMATRIX projectionMatrix, float scale, bool keepWidth)
 {
 	HRESULT result;
     D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -112,6 +112,7 @@ bool Shader2D::SetShaderParameters(ID3D11DeviceContext* deviceContext, D3DXMATRI
 	dataPtr->view = viewMatrix;
 	dataPtr->projection = projectionMatrix;
 	dataPtr->scale = scale;
+	dataPtr->keepWidth = (keepWidth)?0:1;
 
 	// Unlock the constant buffer.
 	deviceContext->Unmap(matBufferPtr, 0);
@@ -126,13 +127,13 @@ bool Shader2D::SetShaderParameters(ID3D11DeviceContext* deviceContext, D3DXMATRI
 }
 
 bool Shader2D::Render(ID3D11DeviceContext* deviceContext, int indexCount, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, 
-								D3DXMATRIX projectionMatrix, float scale)
+								D3DXMATRIX projectionMatrix, float scale, bool keepWidth)
 {
 	bool result;
 
 
 	// Set the shader parameters that it will use for rendering.
-	result = SetShaderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix, scale);
+	result = SetShaderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix, scale, keepWidth);
 	if(!result)
 	{
 		return false;

@@ -24,6 +24,7 @@ public:
 	void Translate(float x, float y);
 	void ScaleView(float k);
 	float GetScale() const;
+	void SetScale(float k);
 private:
 	float m_positionX, m_positionY, m_positionZ;
 	float m_rotationX, m_rotationY, m_rotationZ;

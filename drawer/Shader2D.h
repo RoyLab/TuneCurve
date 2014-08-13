@@ -14,6 +14,7 @@ public:
 		D3DXMATRIX view;
 		D3DXMATRIX projection;
 		float scale;
+		int keepWidth; 
 	};
 
 public:
@@ -24,10 +25,10 @@ public:
 	void Release();
 
 	bool Render(ID3D11DeviceContext* deviceContext, int indexCount,
-		D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix, float scale);
+		D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix, float scale, bool KeepWidth);
 protected:
 	virtual void GetInputLayerout(D3D11_INPUT_ELEMENT_DESC**, int& );
-	bool SetShaderParameters(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, float);
+	bool SetShaderParameters(ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, float, bool);
 	void RenderShader(ID3D11DeviceContext* deviceContext, int indexCount);
 
 protected:

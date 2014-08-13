@@ -14,6 +14,7 @@
 #include "D3DEngine.h"
 #include "DeltaCtrlDiag.h"
 #include "InputHandler.h"
+#include "Camera.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -43,6 +44,17 @@ ON_WM_MOUSEWHEEL()
 ON_WM_MOUSEMOVE()
 ON_UPDATE_COMMAND_UI(ID_MODE_STOCHASTICGAUSS, &CdrawerView::OnUpdateModeStochasticgauss)
 ON_COMMAND(ID_MODE_STOCHASTICGAUSS, &CdrawerView::OnModeStochasticgauss)
+ON_COMMAND(ID_MODE_CHOOSECOLOR, &CdrawerView::OnModeChoosecolor)
+ON_COMMAND(ID_MODE_MONOCOLOR, &CdrawerView::OnModeMonocolor)
+ON_UPDATE_COMMAND_UI(ID_MODE_MONOCOLOR, &CdrawerView::OnUpdateModeMonocolor)
+ON_UPDATE_COMMAND_UI(ID_MODE_CHOOSECOLOR, &CdrawerView::OnUpdateModeChoosecolor)
+ON_COMMAND(ID_MODE_MULTICOLOR, &CdrawerView::OnModeChrome)
+ON_UPDATE_COMMAND_UI(ID_MODE_MULTICOLOR, &CdrawerView::OnUpdateModeChrome)
+ON_COMMAND(ID_MODE_SINGLELINE, &CdrawerView::OnModeSingleline)
+ON_UPDATE_COMMAND_UI(ID_MODE_SINGLELINE, &CdrawerView::OnUpdateModeSingleline)
+ON_COMMAND(ID_MODE_KEEP_WIDTH, &CdrawerView::OnModeKeepWidth)
+ON_UPDATE_COMMAND_UI(ID_MODE_KEEP_WIDTH, &CdrawerView::OnUpdateModeKeepWidth)
+ON_COMMAND(ID_MODE_RESETCAMERA, &CdrawerView::OnModeResetcamera)
 END_MESSAGE_MAP()
 
 // CdrawerView construction/destruction
@@ -268,4 +280,73 @@ void CdrawerView::OnMouseMove(UINT nFlags, CPoint point)
 {
 	mHandler->OnMouseMove(nFlags, point);
 	CView::OnMouseMove(nFlags, point);
+}
+
+void CdrawerView::OnModeChoosecolor()
+{
+	CColorDialog diag;
+	if (IDOK == diag.DoModal())
+	{
+		COLORREF color = diag.GetColor();
+		m3DEngine->GetPixelBuffer().color[0] = GetRValue(color)/255.0f;
+		m3DEngine->GetPixelBuffer().color[1] = GetGValue(color)/255.0f;
+		m3DEngine->GetPixelBuffer().color[2] = GetBValue(color)/255.0f;
+	}
+}
+
+void CdrawerView::OnUpdateModeChoosecolor(CCmdUI *pCmdUI)
+{
+	pCmdUI->Enable(m3DEngine->GetPixelBuffer().color[3] > 0);
+}
+
+void CdrawerView::OnModeMonocolor()
+{
+	m3DEngine->GetPixelBuffer().color[3] = abs(m3DEngine->GetPixelBuffer().color[3]);
+}
+
+
+void CdrawerView::OnUpdateModeMonocolor(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck(m3DEngine->GetPixelBuffer().color[3] > 0);
+}
+
+void CdrawerView::OnModeChrome()
+{
+	m3DEngine->GetPixelBuffer().color[3] = -1.0f*abs(m3DEngine->GetPixelBuffer().color[3]);
+}
+
+
+void CdrawerView::OnUpdateModeChrome(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck(m3DEngine->GetPixelBuffer().color[3] <= 0);
+}
+
+
+void CdrawerView::OnModeSingleline()
+{
+	m3DEngine->mSingleCircle = !m3DEngine->mSingleCircle;
+}
+
+
+void CdrawerView::OnUpdateModeSingleline(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck(m3DEngine->mSingleCircle);
+}
+
+
+void CdrawerView::OnModeKeepWidth()
+{
+	m3DEngine->mKeepWidth = !m3DEngine->mKeepWidth;
+}
+
+
+void CdrawerView::OnUpdateModeKeepWidth(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck(m3DEngine->mKeepWidth);
+}
+
+void CdrawerView::OnModeResetcamera()
+{
+	m3DEngine->GetCamera()->SetScale(1.0f);
+	m3DEngine->GetCamera()->SetPosition(0.0f, 0.0f, -10.0f);
 }

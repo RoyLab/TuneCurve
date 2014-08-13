@@ -89,6 +89,15 @@ BEGIN
         MENUITEM "&Gauss Filter AA",            ID_EDIT_GAUSS, CHECKED
         MENUITEM "&Multi-samp AA",              ID_EDIT_MSAA
         MENUITEM "&Stochastic Gauss",           ID_MODE_STOCHASTICGAUSS
+        MENUITEM SEPARATOR
+        MENUITEM "Reset Camera",                ID_MODE_RESETCAMERA
+        MENUITEM "Single Circle",               ID_MODE_SINGLELINE
+        MENUITEM "Keep LineWidth",              ID_MODE_KEEP_WIDTH
+        MENUITEM SEPARATOR
+        MENUITEM "Mono Color",                  ID_MODE_MONOCOLOR
+        MENUITEM "Chrome",                      ID_MODE_MULTICOLOR
+        MENUITEM SEPARATOR
+        MENUITEM "Choose Color",                ID_MODE_CHOOSECOLOR
     END
     POPUP "&Help"
     BEGIN
@@ -136,28 +145,31 @@ BEGIN
     DEFPUSHBUTTON   "OK",IDOK,113,41,50,14,WS_GROUP
 END
 
-IDD_DELTA_CTRL DIALOGEX 0, 0, 197, 278
+IDD_DELTA_CTRL DIALOGEX 0, 0, 375, 170
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Setttings"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,83,257,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,140,257,50,14
-    CONTROL         "",IDC_DELTA_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,23,37,154,25
+    DEFPUSHBUTTON   "OK",IDOK,261,149,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,318,149,50,14
+    CONTROL         "",IDC_DELTA_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,23,40,154,25
     LTEXT           "Sigma Value",IDC_DELTA,29,25,39,8
     LTEXT           "0",IDC_DELTA_VALUE,102,25,29,8
     CONTROL         "",IDC_THET_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,23,77,154,25
     LTEXT           "Thet Value",IDC_THET,29,65,35,8
     LTEXT           "0",IDC_THET_VALUE,102,65,29,8
-    CONTROL         "",IDC_MS_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,23,167,154,25
-    LTEXT           "MultiSampling",IDC_MS_TEXT,29,152,44,8
-    LTEXT           "0",IDC_MS_VALUE,102,151,29,8
-    CONTROL         "",IDC_CLIP_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,23,121,154,25
-    LTEXT           "Clip Value",IDC_CLIP_TEXT,29,110,32,8
-    LTEXT           "0",IDC_CLIP_VALUE,102,110,29,8
-    CONTROL         "",IDC_NOISE_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,23,214,154,25
-    LTEXT           "Noise",IDC_NOISE_TEXT,29,199,18,8
-    LTEXT           "0",IDC_NOISE_VALUE,102,198,29,8
+    CONTROL         "",IDC_MS_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,199,40,154,25
+    LTEXT           "MultiSampling",IDC_MS_TEXT,205,25,58,8
+    LTEXT           "0",IDC_MS_VALUE,278,25,29,8
+    CONTROL         "",IDC_CLIP_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,23,113,154,25
+    LTEXT           "Clip Value",IDC_CLIP_TEXT,29,102,32,8
+    LTEXT           "0",IDC_CLIP_VALUE,102,102,29,8
+    CONTROL         "",IDC_NOISE_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,199,77,154,25
+    LTEXT           "Noise",IDC_NOISE_TEXT,205,65,18,8
+    LTEXT           "0",IDC_NOISE_VALUE,278,65,29,8
+    CONTROL         "",IDC_TRANSPARENCY_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,198,113,154,25
+    LTEXT           "Transparency",IDC_NOISE_TEXT2,205,102,54,8
+    LTEXT           "0",IDC_TRANSPARNCY_VALUE,278,102,29,8
 END
 
 
@@ -219,9 +231,9 @@ BEGIN
     IDD_DELTA_CTRL, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 190
+        RIGHTMARGIN, 368
         TOPMARGIN, 7
-        BOTTOMMARGIN, 271
+        BOTTOMMARGIN, 163
     END
 END
 #endif    // APSTUDIO_INVOKED

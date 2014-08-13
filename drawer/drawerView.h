@@ -62,6 +62,17 @@ public:
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnUpdateModeStochasticgauss(CCmdUI *pCmdUI);
 	afx_msg void OnModeStochasticgauss();
+	afx_msg void OnModeChoosecolor();
+	afx_msg void OnModeMonocolor();
+	afx_msg void OnUpdateModeMonocolor(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateModeChoosecolor(CCmdUI *pCmdUI);
+	afx_msg void OnModeChrome();
+	afx_msg void OnUpdateModeChrome(CCmdUI *pCmdUI);
+	afx_msg void OnModeSingleline();
+	afx_msg void OnUpdateModeSingleline(CCmdUI *pCmdUI);
+	afx_msg void OnModeKeepWidth();
+	afx_msg void OnUpdateModeKeepWidth(CCmdUI *pCmdUI);
+	afx_msg void OnModeResetcamera();
 };
 
 #ifndef _DEBUG  // debug version in drawerView.cpp
