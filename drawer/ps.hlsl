@@ -96,6 +96,6 @@ float4 PMain(PixelInputType input) : SV_TARGET
 			}
 		}
 	}
-	if (color.a < 0) return float4(input.color, alpha);
-	else return float4(color.xyz, alpha);
+	if (color.a < 0) return float4(input.color, -alpha*color.a);
+	else return float4(color.rgb, alpha*color.a);
 }

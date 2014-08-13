@@ -40,6 +40,8 @@ void DeltaCtrlDiag::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CLIP_VALUE, mClipValue);
 	DDX_Control(pDX, IDC_NOISE_SLIDER, mNoiseSlider);
 	DDX_Control(pDX, IDC_NOISE_VALUE, mNoiseVal);
+	DDX_Control(pDX, IDC_TRANSPARENCY_SLIDER, mTransSlider);
+	DDX_Control(pDX, IDC_TRANSPARNCY_VALUE, mTransVal);
 }
 
 
@@ -101,6 +103,17 @@ void DeltaCtrlDiag::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 		CString tmp;
 		tmp.Format(_T("%0.2f"), val);
 		mNoiseVal.SetWindowTextW(tmp);
+		break;
+	}
+	case IDC_TRANSPARENCY_SLIDER:
+	{
+		float val =(1+ mTransSlider.GetPos())/101.0f;
+		float alpha = (mParent->GetD3DEngine()->
+			GetPixelBuffer().color[3] > 0)?val:-val;
+		mParent->GetD3DEngine()->GetPixelBuffer().color[3] = alpha;
+		CString tmp;
+		tmp.Format(_T("%0.2f"), val);
+		mTransVal.SetWindowTextW(tmp);
 		break;
 	}
 	default:

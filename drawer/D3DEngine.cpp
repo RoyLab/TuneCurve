@@ -8,7 +8,8 @@
 
 D3DEngine::D3DEngine(void):
 	mD3D(nullptr), mCamera(nullptr), 
-	mShader(nullptr), mCircle(nullptr)
+	mShader(nullptr), mCircle(nullptr),
+	mKeepWidth(true), mSingleCircle(false)
 {
 }
 

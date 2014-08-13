@@ -87,8 +87,8 @@ BEGIN
         MENUITEM "&Para Setting",               ID_DELTA_VALUE
         MENUITEM SEPARATOR
         MENUITEM "&Gauss Filter AA",            ID_EDIT_GAUSS, CHECKED
-        MENUITEM "&Multi-samp AA",              ID_EDIT_MSAA
         MENUITEM "&Stochastic Gauss",           ID_MODE_STOCHASTICGAUSS
+        MENUITEM "&Multi-samp AA",              ID_EDIT_MSAA
         MENUITEM SEPARATOR
         MENUITEM "Reset Camera",                ID_MODE_RESETCAMERA
         MENUITEM "Single Circle",               ID_MODE_SINGLELINE

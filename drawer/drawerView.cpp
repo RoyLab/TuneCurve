@@ -160,6 +160,8 @@ void CdrawerView::OnDeltaValue()
 		mDiag->mClipValue.SetWindowTextW(L"2.50");
 		mDiag->mNoiseSlider.SetPos(20);
 		mDiag->mNoiseVal.SetWindowTextW(L"0.2");
+		mDiag->mTransSlider.SetPos(100);
+		mDiag->mTransVal.SetWindowTextW(L"1.0");
 		switch (m3DEngine->GetAAMode())
 		{
 		case AA_GAUSS:
