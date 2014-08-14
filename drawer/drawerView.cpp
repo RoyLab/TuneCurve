@@ -135,6 +135,7 @@ void CdrawerView::OnInitialUpdate()
 	////////////////////////////////////////
 	m3DEngine->SetLineWidth(2.0f);
 	m3DEngine->SetYAxis(200.0f);
+	m3DEngine->SetXAxis(200.0f);
 	////////////////////////////////////////
 }
 
@@ -157,6 +158,7 @@ void CdrawerView::OnDeltaValue()
 		////////////////////////////////////////
 		mDiag->SetLineWidth(2.0f);
 		mDiag->SetYAxis(200.0f);
+		mDiag->SetXAxis(200.0f);
 		////////////////////////////////////////
 		switch (m3DEngine->GetAAMode())
 		{
@@ -172,7 +174,11 @@ void CdrawerView::OnDeltaValue()
 		default:
 			break;
 		}
-
+		mDiag->mSlider.EnableWindow(true);
+		mDiag->mThetSlider.EnableWindow(true);
+		mDiag->mClipSlider.EnableWindow(true);
+		mDiag->mMultiSlider.EnableWindow(false);
+		mDiag->mNoiseSlider.EnableWindow(false);
 	}
 	mDiag->ShowWindow(SW_SHOW);
 }

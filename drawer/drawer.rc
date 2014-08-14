@@ -153,7 +153,7 @@ BEGIN
     LTEXT           "MultiSampling",IDC_MS_TEXT,29,152,44,8
     LTEXT           "0",IDC_MS_VALUE,102,151,29,8
     CONTROL         "",IDC_CLIP_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,23,121,154,25
-    LTEXT           "Clip Value",IDC_CLIP_TEXT,29,110,32,8
+    LTEXT           "X Axis",IDC_CLIP_TEXT,29,110,20,8
     LTEXT           "0",IDC_CLIP_VALUE,102,110,29,8
     CONTROL         "",IDC_NOISE_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,23,214,154,25
     LTEXT           "Noise",IDC_NOISE_TEXT,29,199,18,8

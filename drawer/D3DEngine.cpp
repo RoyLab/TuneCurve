@@ -176,3 +176,8 @@ void D3DEngine::SetYAxis(float val)
 	else mCircle->GetPixelBufferData()->coef[1] = 40000.0f/val/val;
 }
 
+void D3DEngine::SetXAxis(float val)
+{
+	if (val < 1) mCircle->GetPixelBufferData()->coef[0] = 40000.0f;
+	else mCircle->GetPixelBufferData()->coef[0] = 40000.0f/val/val;
+}

@@ -16,7 +16,13 @@ void DeltaCtrlDiag::SetLineWidth(float width)
 	tmp.Format(_T("%0.2f"), width);
 	mDeltaVal.SetWindowTextW(tmp);
 }
-
+void DeltaCtrlDiag::SetXAxis(float height)
+{
+	mClipSlider.SetPos(int(height/2));
+	CString tmp;
+	tmp.Format(_T("%0.2f"), height);
+	mClipValue.SetWindowTextW(tmp);
+}
 void DeltaCtrlDiag::SetYAxis(float height)
 {
 	mThetSlider.SetPos(int(height/2));
@@ -112,12 +118,18 @@ void DeltaCtrlDiag::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 	}
 	case IDC_CLIP_SLIDER:
 	{
-		int val = mClipSlider.GetPos();
-		mParent->GetD3DEngine()->SetClipEdgeValue(val);
-		float val2 = val/20.0f+1.0f;
+		//int val = mClipSlider.GetPos();
+		//mParent->GetD3DEngine()->SetClipEdgeValue(val);
+		//float val2 = val/20.0f+1.0f;
+		//CString tmp;
+		//tmp.Format(_T("%0.2f"), val2);
+		//mClipValue.SetWindowTextW(tmp);
+		//break;
+		float val = mClipSlider.GetPos()*5.0f;
 		CString tmp;
-		tmp.Format(_T("%0.2f"), val2);
+		tmp.Format(_T("%0.2f"), val);
 		mClipValue.SetWindowTextW(tmp);
+		mParent->GetD3DEngine()->SetXAxis(val);
 		break;
 	}
 	case IDC_NOISE_SLIDER:

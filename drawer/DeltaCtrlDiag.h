@@ -16,6 +16,7 @@ public:
 
 	void SetLineWidth(float);
 	void SetYAxis(float);
+	void SetXAxis(float);
 
 // Dialog Data
 	enum { IDD = IDD_DELTA_CTRL };

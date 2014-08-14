@@ -29,6 +29,7 @@ public:
 	AA_MODE GetAAMode()const;
 	void SetLineWidth(float val);
 	void SetYAxis(float val);
+	void SetXAxis(float val);
 
 	Camera *GetCamera()const{return mCamera;}
 	VirtualDeviceDx11 *GetDevice()const{return mD3D;}
