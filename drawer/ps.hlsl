@@ -132,7 +132,7 @@ float4 PMain(PixelInputType input) : SV_TARGET
 	if (d < width) 
 	{
 		if (res.a > 0.9f)
-			res = float4(0, 0, 0, 1);
+			res = float4(1, 1, 0, 1);
 		else 
 			res += float4(0, 1, 0, 1);
 	}
