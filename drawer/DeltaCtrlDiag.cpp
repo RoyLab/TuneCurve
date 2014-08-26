@@ -86,7 +86,7 @@ void DeltaCtrlDiag::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 		//tmp.Format(_T("%d"), val);
 		//mDeltaVal.SetWindowTextW(tmp);
 		//mParent->GetD3DEngine()->SetSigmaValue(val);
-		float val = mSlider.GetPos()/2.0f;
+		float val = exp(mSlider.GetPos()/25.0)*20.0/exp(4.0);
 		CString tmp;
 		tmp.Format(_T("%0.2f"), val);
 		mDeltaVal.SetWindowTextW(tmp);
