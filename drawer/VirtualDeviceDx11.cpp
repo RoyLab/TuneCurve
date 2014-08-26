@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "VirtualDeviceDx11.h"
+#include <cstring>
 
 VirtualDeviceDx11::VirtualDeviceDx11()
 {
@@ -71,48 +72,54 @@ bool VirtualDeviceDx11::Initialize(int screenWidth, int screenHeight, bool vsync
 	result = adapter->EnumOutputs(0, &adapterOutput);
 	if(FAILED(result))
 	{
+		MessageBox(hwnd, L"adapterOutput failed", L"Error", MB_OK);
 		return false;
 	}
 
 	// Get the number of modes that fit the DXGI_FORMAT_R8G8B8A8_UNORM display format for the adapter output (monitor).
-	result = adapterOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, NULL);
-	if(FAILED(result))
-	{
-		return false;
-	}
+	//result = adapterOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, NULL);
+	//if(FAILED(result))
+	//{
+	//	CString tmp;
+	//	tmp.Format(L"%x", result);
+	//	MessageBox(hwnd, L"numModes failed", tmp, MB_OK);
+	//	return false;
+	//}
 
-	// Create a list to hold all the possible display modes for this monitor/video card combination.
-	displayModeList = new DXGI_MODE_DESC[numModes];
-	if(!displayModeList)
-	{
-		return false;
-	}
+	//// Create a list to hold all the possible display modes for this monitor/video card combination.
+	//displayModeList = new DXGI_MODE_DESC[numModes];
+	//if(!displayModeList)
+	//{
+	//	MessageBox(hwnd, L"displayModeList memory applied failed", L"Error", MB_OK);
+	//	return false;
+	//}
 
-	// Now fill the display mode list structures.
-	result = adapterOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, displayModeList);
-	if(FAILED(result))
-	{
-		return false;
-	}
+	//// Now fill the display mode list structures.
+	//result = adapterOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, displayModeList);
+	//if(FAILED(result))
+	//{
+	//	return false;
+	//}
 
-	// Now go through all the display modes and find the one that matches the screen width and height.
-	// When a match is found store the numerator and denominator of the refresh rate for that monitor.
-	for(i=0; i<numModes; i++)
-	{
-		if(displayModeList[i].Width == (unsigned int)screenWidth)
-		{
-			if(displayModeList[i].Height == (unsigned int)screenHeight)
-			{
-				numerator = displayModeList[i].RefreshRate.Numerator;
-				denominator = displayModeList[i].RefreshRate.Denominator;
-			}
-		}
-	}
+	//// Now go through all the display modes and find the one that matches the screen width and height.
+	//// When a match is found store the numerator and denominator of the refresh rate for that monitor.
+	//for(i=0; i<numModes; i++)
+	//{
+	//	if(displayModeList[i].Width == (unsigned int)screenWidth)
+	//	{
+	//		if(displayModeList[i].Height == (unsigned int)screenHeight)
+	//		{
+	//			numerator = displayModeList[i].RefreshRate.Numerator;
+	//			denominator = displayModeList[i].RefreshRate.Denominator;
+	//		}
+	//	}
+	//}
 
 	// Get the adapter (video card) description.
 	result = adapter->GetDesc(&adapterDesc);
 	if(FAILED(result))
 	{
+		MessageBox(hwnd, L"GetDesc failed", L"Error", MB_OK);
 		return false;
 	}
 
@@ -123,12 +130,13 @@ bool VirtualDeviceDx11::Initialize(int screenWidth, int screenHeight, bool vsync
 	error = wcstombs_s(&stringLength, m_videoCardDescription, 128, adapterDesc.Description, 128);
 	if(error != 0)
 	{
+		MessageBox(hwnd, L"error wcstombs_s", L"Error", MB_OK);
 		return false;
 	}
 
 	// Release the display mode list.
-	delete [] displayModeList;
-	displayModeList = 0;
+	//delete [] displayModeList;
+	//displayModeList = 0;
 
 	// Release the adapter output.
 	adapterOutput->Release();
@@ -205,6 +213,7 @@ bool VirtualDeviceDx11::Initialize(int screenWidth, int screenHeight, bool vsync
 										   &m_device, NULL, &m_deviceContext);
 	if(FAILED(result))
 	{
+		MessageBox(hwnd, L"swapChainDesc error", L"Error", MB_OK);
 		return false;
 	}
 
@@ -212,6 +221,7 @@ bool VirtualDeviceDx11::Initialize(int screenWidth, int screenHeight, bool vsync
 	result = m_swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&backBufferPtr);
 	if(FAILED(result))
 	{
+		MessageBox(hwnd, L"GetBuffer error", L"Error", MB_OK);
 		return false;
 	}
 
@@ -219,6 +229,7 @@ bool VirtualDeviceDx11::Initialize(int screenWidth, int screenHeight, bool vsync
 	result = m_device->CreateRenderTargetView(backBufferPtr, NULL, &m_renderTargetView);
 	if(FAILED(result))
 	{
+		MessageBox(hwnd, L"CreateRenderTargetView error", L"Error", MB_OK);
 		return false;
 	}
 

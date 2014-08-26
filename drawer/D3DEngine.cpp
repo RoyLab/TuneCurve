@@ -21,10 +21,13 @@ D3DEngine::~D3DEngine(void)
 bool D3DEngine::Initialize(int width, int height, HWND hWnd)
 {
 	bool res = false;
-
 	mD3D = new VirtualDeviceDx11;
 	res = mD3D->Initialize(width, height, true, hWnd, false, 1000.0f, 0.1f);
-	if (!res) return false;
+	if (!res)
+	{
+		MessageBox(hWnd, L"Could not initialize the device object.", L"Error", MB_OK);
+		return false;
+	}
 
 	mCamera = new Camera;
 	if(!mCamera) return false;
@@ -108,7 +111,7 @@ bool D3DEngine::Frame()
 	D3DXMATRIX worldMatrix, viewMatrix, orthoMatrix;
 	bool res(false);
 
-	mD3D->BeginScene(0.1f, 0.1f, 0.2f, 1.0f);
+	mD3D->BeginScene(0.117f, 0.15686f, 0.1882f, 1.0f);
 	mCamera->Render();
 
 	mCamera->GetViewMatrix(viewMatrix);

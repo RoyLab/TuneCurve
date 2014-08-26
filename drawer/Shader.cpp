@@ -52,7 +52,7 @@ bool   Shader::Initialize(ID3D11Device* device, HWND hwnd, WCHAR* vsFileName, LP
 	ID3D10Blob* vertexShaderBuffer = 0;
 	ID3D10Blob* pixelShaderBuffer = 0 ;
 	// Compile the vertex shader code.
-	result = D3DX11CompileFromFile(vsFileName, NULL, NULL, vsName, "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS|D3D10_SHADER_DEBUG|D3D10_SHADER_SKIP_OPTIMIZATION, 0, NULL, 
+	result = D3DX11CompileFromFile(vsFileName, NULL, NULL, vsName, "vs_5_0", 0/* D3D10_SHADER_ENABLE_STRICTNESS*//*|D3D10_SHADER_DEBUG|D3D10_SHADER_SKIP_OPTIMIZATION*/, 0, NULL, 
 								   &vertexShaderBuffer, &errorMessage, NULL);
 	if(FAILED(result))
 	{
@@ -62,7 +62,7 @@ bool   Shader::Initialize(ID3D11Device* device, HWND hwnd, WCHAR* vsFileName, LP
 	}
 
     // Compile the pixel shader code.
-	result = D3DX11CompileFromFile(psFileName, NULL, NULL, psName, "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS|D3D10_SHADER_DEBUG|D3D10_SHADER_SKIP_OPTIMIZATION, 0, NULL, 
+	result = D3DX11CompileFromFile(psFileName, NULL, NULL, psName, "ps_5_0", 0/*D3D10_SHADER_ENABLE_STRICTNESS*//*|D3D10_SHADER_DEBUG|D3D10_SHADER_SKIP_OPTIMIZATION*/, 0, NULL, 
 								   &pixelShaderBuffer, &errorMessage, NULL);
 	if(FAILED(result))
 	{
