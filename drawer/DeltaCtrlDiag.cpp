@@ -100,7 +100,7 @@ void DeltaCtrlDiag::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 		//tmp.Format(_T("%d"), val);
 		//mThetVal.SetWindowTextW(tmp);
 		//mParent->GetD3DEngine()->SetThetValue(val);
-		float val = mThetSlider.GetPos()*2.0f;
+		float val = mThetSlider.GetPos()*1.0f;
 		CString tmp;
 		tmp.Format(_T("%0.2f"), val);
 		mThetVal.SetWindowTextW(tmp);
@@ -125,7 +125,7 @@ void DeltaCtrlDiag::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 		//tmp.Format(_T("%0.2f"), val2);
 		//mClipValue.SetWindowTextW(tmp);
 		//break;
-		float val = mClipSlider.GetPos()*2.0f;
+		float val = mClipSlider.GetPos()*6.0f;
 		CString tmp;
 		tmp.Format(_T("%0.2f"), val);
 		mClipValue.SetWindowTextW(tmp);
