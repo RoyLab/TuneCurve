@@ -1,5 +1,6 @@
 #pragma once
 #include "MultiCircle.h"
+#include "MyCanvas.h"
 
 class VirtualDeviceDx11;
 class Camera;
@@ -30,6 +31,7 @@ public:
 	Camera *GetCamera()const{return mCamera;}
 	VirtualDeviceDx11 *GetDevice()const{return mD3D;}
 	MultiCircle::PixelBufferType &GetPixelBuffer(){return *(mCircle->GetPixelBufferData());}
+	MultiCircle::PixelBufferType &GetPixelBuffer2(){return *(mCanvas->GetPixelBufferData());}
 
 	bool mSingleCircle, mKeepWidth;
 private:
@@ -37,5 +39,6 @@ private:
 	Camera *mCamera;
 	Shader2D *mShader;
 	MultiCircle *mCircle;
+	MyCanvas *mCanvas;
 };
 

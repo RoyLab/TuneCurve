@@ -48,7 +48,7 @@ bool MultiCircle::Initialize(int width, int height)
 bool MultiCircle::Frame()
 {
 	//pixel buffer upate
-	if (mIsPixelBufferChanged)
+	if (true)
 	{
 		mPixelBuff->Update(mDevCon, 0, sizeof(PixelBufferType)/4, &mPixelBufferData);
 		ID3D11Buffer *pixelBuff = mPixelBuff->GetDeviceBuffer();

@@ -4,12 +4,13 @@
 #include "Camera.h"
 #include "Shader2D.h"
 #include "MultiCircle.h"
-
+#include "ShaderLine.h"
 
 D3DEngine::D3DEngine(void):
 	mD3D(nullptr), mCamera(nullptr), 
 	mShader(nullptr), mCircle(nullptr),
-	mKeepWidth(true), mSingleCircle(false)
+	mKeepWidth(true), mSingleCircle(false),
+	mCanvas(nullptr)
 {
 }
 
@@ -56,6 +57,21 @@ bool D3DEngine::Initialize(int width, int height, HWND hWnd)
 	cPara.count = 80;
 	mCircle->SetCircleParameter(cPara);
 
+	res = mCircle->Initialize(width, height);
+	if(!res)
+	{
+		MessageBox(hWnd, L"Could not initialize the circle object.", L"Error", MB_OK);
+		return false;
+	}
+
+	mCanvas = new MyCanvas(mD3D->GetDevice(), mD3D->GetDeviceContext(), hWnd);
+	res = mCanvas->Initialize(width, height);
+	if(!res)
+	{
+		MessageBox(hWnd, L"Could not initialize the canvas object.", L"Error", MB_OK);
+		return false;
+	}
+
 	MultiCircle::PixelBufferType pBufferData;
 	pBufferData.AAMode = AA_GAUSS;
 	pBufferData.clipEdge = 3.0f;
@@ -65,13 +81,7 @@ bool D3DEngine::Initialize(int width, int height, HWND hWnd)
 	pBufferData.noise = 20;
 	pBufferData.color = D3DXVECTOR4(1.0f, 1.0f, 1.0f, -1.0f);
 	mCircle->SetPixelBufferData(pBufferData);
-
-	res = mCircle->Initialize(width, height);
-	if(!res)
-	{
-		MessageBox(hWnd, L"Could not initialize the circle object.", L"Error", MB_OK);
-		return false;
-	}
+	mCanvas->SetPixelBufferData(pBufferData);
 
 	return true;
 }
@@ -120,13 +130,19 @@ bool D3DEngine::Frame()
 
 	mD3D->TurnZBufferOff();
 
-	//res = mCircle->Render(mD3D->GetDeviceContext(), 100, 100, 256, 256, mSigma, mMSAAlvl);
 	res = mCircle->Frame();
 	if (!res) return false;
 
 	res = mShader->Render(mD3D->GetDeviceContext(), mSingleCircle?6:mCircle->GetIndexCount(), 
 		worldMatrix, viewMatrix, orthoMatrix, mCamera->GetScale(), mKeepWidth);
 	if (!res) return false;
+
+	res = mCanvas->Frame();
+	if (!res) return false;
+
+	auto shader = mCanvas->GetShader();
+	res = shader->Render(mD3D->GetDeviceContext(), 6, 
+		worldMatrix, viewMatrix, orthoMatrix, mCamera->GetScale(), mKeepWidth);
 
 	mD3D->EndScene();
 
@@ -136,6 +152,7 @@ bool D3DEngine::Frame()
 void D3DEngine::SetAAMode(AA_MODE mode)
 {
 	mCircle->GetPixelBufferData()->AAMode = mode;
+	mCanvas->GetPixelBufferData()->AAMode = mode;
 }
 
 AA_MODE D3DEngine::GetAAMode()const
@@ -147,24 +164,29 @@ void D3DEngine::SetSigmaValue(int val)
 {
 	float tmp = (float)2.0e-2*val;
 	mCircle->GetPixelBufferData()->sigma_2 = -2.0*tmp*tmp;
+	mCanvas->GetPixelBufferData()->sigma_2 = -2.0*tmp*tmp;
 }
 
 void D3DEngine::SetThetValue(int val)
 {
 	mCircle->GetPixelBufferData()->thet = (float)val/100.0f+1.0f;
+	mCanvas->GetPixelBufferData()->thet = (float)val/100.0f+1.0f;
 }
 
 void D3DEngine::SetMSAAlvl(int val)
 {
 	mCircle->GetPixelBufferData()->samplelvl = val;
+	mCanvas->GetPixelBufferData()->samplelvl = val;
 }
 
 void D3DEngine::SetClipEdgeValue(int val)
 {
 	mCircle->GetPixelBufferData()->clipEdge = (float)val/20.0f+1.0f;
+	mCanvas->GetPixelBufferData()->clipEdge = (float)val/20.0f+1.0f;
 }
 
 void D3DEngine::SetNoiseValue(float val)
 {
 	mCircle->GetPixelBufferData()->noise = int(val*200);
+	mCanvas->GetPixelBufferData()->noise = int(val*200);
 }

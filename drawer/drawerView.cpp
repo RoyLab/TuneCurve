@@ -220,11 +220,13 @@ void CdrawerView::OnEditMsaa()
 void CdrawerView::OnUpdateEditMsaa(CCmdUI *pCmdUI)
 {
 	pCmdUI->SetCheck(AA_MS == m3DEngine->GetAAMode());
+	pCmdUI->Enable(false);
 }
 
 void CdrawerView::OnUpdateModeStochasticgauss(CCmdUI *pCmdUI)
 {
 	pCmdUI->SetCheck(AA_STOCHASTIC_GAUSS == m3DEngine->GetAAMode());
+	pCmdUI->Enable(false);
 }
 
 
@@ -290,6 +292,9 @@ void CdrawerView::OnModeChoosecolor()
 	if (IDOK == diag.DoModal())
 	{
 		COLORREF color = diag.GetColor();
+		m3DEngine->GetPixelBuffer2().color[0] = GetRValue(color)/255.0f;
+		m3DEngine->GetPixelBuffer2().color[1] = GetGValue(color)/255.0f;
+		m3DEngine->GetPixelBuffer2().color[2] = GetBValue(color)/255.0f;
 		m3DEngine->GetPixelBuffer().color[0] = GetRValue(color)/255.0f;
 		m3DEngine->GetPixelBuffer().color[1] = GetGValue(color)/255.0f;
 		m3DEngine->GetPixelBuffer().color[2] = GetBValue(color)/255.0f;

@@ -9,7 +9,7 @@ public :
 	Shader();
     virtual ~Shader();
 	virtual void Release();
-	bool Initialize(ID3D11Device* device, HWND hwnd, WCHAR* vsFileName, LPCSTR vsName, WCHAR* psFileName,  LPCSTR psName );
+	virtual bool Initialize(ID3D11Device* device, HWND hwnd, WCHAR* vsFileName, LPCSTR vsName, WCHAR* psFileName,  LPCSTR psName );
 	virtual void Render(ID3D11DeviceContext* deviceContext);
 protected :
 	virtual void  GetInputLayerout(D3D11_INPUT_ELEMENT_DESC**, int& ) =0;

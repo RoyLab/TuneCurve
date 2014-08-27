@@ -111,6 +111,12 @@
     <ClInclude Include="MultiCircle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderLine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyCanvas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="drawer.cpp">
@@ -155,6 +161,12 @@
     <ClCompile Include="MultiCircle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyCanvas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="drawer.rc">
@@ -179,6 +191,12 @@
       <Filter>shader</Filter>
     </FxCompile>
     <FxCompile Include="vs.hlsl">
+      <Filter>shader</Filter>
+    </FxCompile>
+    <FxCompile Include="vsCanvas.hlsl">
+      <Filter>shader</Filter>
+    </FxCompile>
+    <FxCompile Include="psCanvas.hlsl">
       <Filter>shader</Filter>
     </FxCompile>
   </ItemGroup>
